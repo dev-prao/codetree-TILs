@@ -76,12 +76,12 @@ public class Main {
 
 	}
 
-	static void move(int knightIdx, int d) {
-		if (canMove(knightIdx, d)) {
+	static void move(int knightIdx, int dir) {
+		if (canMove(knightIdx, dir)) {
 			for (int i = 1; i <= N; i++) {
 				if (knights[i].isUsed) {
-					knights[i].row += dr[d];
-					knights[i].col += dc[d];
+					knights[i].row += dr[dir];
+					knights[i].col += dc[dir];
 					knights[i].hp -= knights[i].dmg;
 				}
 				knights[i].isUsed = false;
