@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class Main {
 
 	static int L, N, Q; // 체스판 크기, 기사의 수, 명령의 수
-	static int[][] map;
+	static int[][] board;
 	static Knight[] knights;
 
 	static int[] dr = {-1, 0, 1, 0};
@@ -22,13 +22,13 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		Q = Integer.parseInt(st.nextToken());
 
-		map = new int[L + 1][L + 1];
+		board = new int[L + 1][L + 1];
 		knights = new Knight[N + 1];
 		int[] maxHp = new int[N + 1];
 		for (int i = 1; i <= L; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 1; j <= L; j++) {
-				map[i][j] = Integer.parseInt(st.nextToken());
+				board[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
 
@@ -43,12 +43,12 @@ public class Main {
 			maxHp[i] = knights[i].hp;
 		}
 
-		for (int i = 0; i < Q; i++) {
+		for (int command = 0; command < Q; command++) {
 			st = new StringTokenizer(br.readLine());
-			int kNum = Integer.parseInt(st.nextToken());
+			int knightIdx = Integer.parseInt(st.nextToken());
 			int d = Integer.parseInt(st.nextToken());
-			if (knights[kNum].hp > 0)
-				move(kNum, d);
+			if (knights[knightIdx].hp > 0)
+				move(knightIdx, d);
 		}
 		int res = 0;
 		for (int i = 1; i <= N; i++) {
@@ -95,15 +95,15 @@ public class Main {
 		}
 	}
 
-	static boolean canMove(int knightIdx, int d) {
+	static boolean canMove(int knightIdx, int dir) {
 		Deque<Integer> queue = new ArrayDeque<>();
 
 		queue.add(knightIdx);
 		knights[knightIdx].isUsed = true;
 		while (!queue.isEmpty()) {
 			int idx = queue.poll();
-			int row = knights[idx].row + dr[d];
-			int col = knights[idx].col + dc[d];
+			int row = knights[idx].row + dr[dir];
+			int col = knights[idx].col + dc[dir];
 			int height = knights[idx].height;
 			int width = knights[idx].width;
 
@@ -112,9 +112,9 @@ public class Main {
 
 			for (int i = row; i < row + height; i++) {
 				for (int j = col; j < col + width; j++) {
-					if (map[i][j] == 1) {
+					if (board[i][j] == 1) {
 						knights[idx].dmg++;
-					} else if (map[i][j] == 2) {
+					} else if (board[i][j] == 2) {
 						return false;
 					}
 				}
@@ -136,7 +136,7 @@ public class Main {
 		return true;
 	}
 
-	static boolean isValidRange(int r, int c, int h, int w) {
-		return r >= 1 && r + h - 1 <= L && c >= 1 && c + w - 1 <= L;
+	static boolean isValidRange(int row, int col, int height, int width) {
+		return row >= 1 && row + height - 1 <= L && col >= 1 && col + width - 1 <= L;
 	}
 }
