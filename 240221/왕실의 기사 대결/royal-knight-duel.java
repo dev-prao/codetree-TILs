@@ -74,7 +74,8 @@ public class Main {
 				if (board[r][c][index] == index) {
 					int nr = r + dr[dir];
 					int nc = c + dc[dir];
-					if (nr < 0 || nc < 0 || nr + curr.h >= L || nc + curr.w >= L) {
+					if (nr < 0 || nc < 0 || nr + curr.h >= L || nc + curr.w >= L
+						|| board[nr][nc][index] == 2) {
 						continue;
 					}
 					board[r][c][index] = 0;
