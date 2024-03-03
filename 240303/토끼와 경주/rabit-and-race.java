@@ -7,11 +7,12 @@ import java.util.StringTokenizer;
 public class Main {
 
 	static class Rabbit implements Comparable<Rabbit> {
-		int jump, r, c, pid, dist, score;
+		int jump, r, c, pid, dist;
+		long score;
 		boolean isSelected;
 
 		public Rabbit(final int jump, final int r, final int c, final int pid, final int dist,
-			final int score, final boolean isSelected) {
+			final long score, final boolean isSelected) {
 			this.jump = jump;
 			this.r = r;
 			this.c = c;
@@ -141,7 +142,7 @@ public class Main {
 				}
 			}
 		}
-		int max = Integer.MIN_VALUE;
+		long max = Integer.MIN_VALUE;
 		for (int idx = 0; idx < P; idx++) {
 			max = Math.max(max, rabbits[idx].score);
 		}
