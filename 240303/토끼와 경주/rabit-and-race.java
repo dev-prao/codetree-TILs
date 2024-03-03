@@ -84,7 +84,7 @@ public class Main {
 						nr = (nr + (N * 2 - 2)) % (N * 2 - 2);
 						nc = (nc + (M * 2 - 2)) % (M * 2 - 2);
 						if (nr > N) nr = N * 2 - 2 - nr;
-						if (nc > M) nc = N * 2 - 2 - nc;
+						if (nc > M) nc = M * 2 - 2 - nc;
 						info[dir][0] = nr + nc;
 						info[dir][1] = nr;
 						info[dir][2] = nc;
